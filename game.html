@@ -663,7 +663,7 @@ function step(h){if(window.slingLock)return;
  cool-=h;if(fr.web){fr.web=0;if(!web){const a=findAnchor();if(a){if(grounded){v.y=8;grounded=false}att(a)}}}if(K.KeyE&&!web&&!grounded&&anchorC&&cool<=0)att(anchorC);
  coy=grounded?.12:Math.max(0,coy-h);if(grounded||web||onW||zip)dj=0;if(fr.jump>0){fr.jump-=h;if(web){fr.jump=0;release();v.y+=7;snd(300,600,.1)}else if(onW){fr.jump=0;v.set(wnx*8,10,wnz*8);onW=false;snd(300,600,.1)}else if(grounded||coy>0){fr.jump=0;coy=0;v.y=12.5;grounded=false;snd(250,500,.1)}else if(!grounded&&!zip&&airT>.1){fr.jump=0;if(!dj){dj=1;actLeap()}startTrick()}}
  if(zip){zip.T+=h;_t.copy(zip.t).sub(_o.set(p.x,p.y+1.3,p.z));const zd=_t.length();if(zd<3.5||zip.T>1.3){v.y=Math.max(v.y,7);v.x*=.8;v.z*=.8;zip=null;webL.visible=false;zipCD=performance.now()+600}else{_t.divideScalar(zd);v.copy(_t).multiplyScalar(40)}}
- else if(web){v.x+=dx*10*h;v.z+=dz*10*h;if(sh)v.y-=16*h;if(pull>0){pull-=h;_t.copy(web).sub(_o.set(p.x,p.y+1.3,p.z));const dd=_t.length();_t.divideScalar(dd);v.addScaledVector(_t,32*h);L=Math.min(L,dd)}else L=Math.max(12,L-3*h);if(K.KeyZ)L=Math.max(8,L-20*h);if(K.KeyX)L=Math.min(110,L+20*h);{const h3=Math.hypot(v.x,v.z);if(!(pull>0)&&h3>4&&v.y<0){const k3=16*h/h3;v.x+=v.x*k3;v.z+=v.z*k3}}
+ else if(web){v.x+=dx*10*h;v.z+=dz*10*h;if(sh)v.y-=16*h;if(pull>0){pull-=h;_t.copy(web).sub(_o.set(p.x,p.y+1.3,p.z));const dd=_t.length();_t.divideScalar(dd);v.addScaledVector(_t,32*h);L=Math.min(L,dd)}else L=Math.max(window.__carry&&window.__carry.on?6:12,L-3*h);if(K.KeyZ)L=Math.max(8,L-20*h);if(K.KeyX)L=Math.min(110,L+20*h);{const h3=Math.hypot(v.x,v.z);if(!(pull>0)&&h3>4&&v.y<0){const k3=16*h/h3;v.x+=v.x*k3;v.z+=v.z*k3}}
   if(dl>0){const s=Math.hypot(v.x,v.y,v.z);if(s>1){const k=1.2*h/s;v.x+=v.x*k;v.y+=v.y*k*.3;v.z+=v.z*k}}}
  else if(onW){const climbSpeed=sh?17:9,crawlSpeed=sh?4.5:2;v.x=-wnx*crawlSpeed;v.z=-wnz*crawlSpeed;v.y+=((K.KeyS?-(sh?8:5):climbSpeed)-v.y)*Math.min(1,(sh?15:10)*h)}else if(grounded){const sp=sh?16:9,k=Math.min(1,14*h);v.x+=(dx*sp-v.x)*k;v.z+=(dz*sp-v.z)*k}
  else{v.x+=dx*11*h;v.z+=dz*11*h;if(sh)v.y-=18*h;const d=1-.12*h;v.x*=d;v.z*=d}
@@ -775,7 +775,7 @@ function frame(n){requestAnimationFrame(frame);const rdt=Math.min((n-last)/1000,
  if(mode=='play'){qT-=dt;if(qT<0){qT=12+Math.random()*10;hsay(pick(WX.t.q&&Math.random()<.5?WX.t.q:HQ),2500)}}
  if(inRoom&&mode=='play'&&(p.z>RZ1+.3||p.y<RY-.5)){inRoom=false;toast('NOW WEB SWING!  Hold E / tap WEB SWING in mid-air  ·  Q / ZIP to zip up');hsay('Here we go!',1800)}chunkUpd(dt);if(mode!="play")lk.style.display="none";crimeHUD.style.display=mode==='play'?'block':'none';anim(dt);camUpd(dt);env();wxPost(dt);skyUpd();extras(dt);hud(dt,tr);bubs(dt);R.render(S,cam)}
 // ---------- input / menus ----------
-const HELP='PC: WASD move · SHIFT sprint · SPACE jump · hold E swing · Q web-zip · V slam · B barrage · K slingshot (anywhere, even mid-air) · U spider-sense · Z/X shorten/lengthen web · F or left-click web-fire (yank and throw people) · press jump again in mid-air = double-jump leap + trick · 1-8 weather · arrows or mouse for camera (click the game to capture the mouse). Mobile: joystick move · drag screen to look · buttons for jump, swing and web-fire; double-tap JUMP to leap; SLING button (above SWING) = long-range slingshot boost; tap ••• for zip, slam, barrage and spider-sense; push the stick to the edge to sprint. Wall crawling is automatic: run into a wall. DARK NIGHT + RAIN summons BATMAN: he chases, grapples and punches - web-fire him to freeze him for a few seconds, run (or sling away), or change the weather. Watch the small HP bar!';
+const HELP='PC: WASD move · SHIFT sprint · SPACE jump · hold E swing · Q web-zip · V slam · B barrage · K slingshot (anywhere, even mid-air) · L lock onto a friend and hang from their web (jump to let go) · U spider-sense · Z/X shorten/lengthen web · F or left-click web-fire (yank and throw people) · press jump again in mid-air = double-jump leap + trick · 1-8 weather · arrows or mouse for camera (click the game to capture the mouse). Mobile: joystick move · drag screen to look · buttons for jump, swing and web-fire; double-tap JUMP to leap; SLING button (above SWING) = long-range slingshot boost; tap ••• for zip, slam, lock (hang from a friend), barrage and spider-sense; push the stick to the edge to sprint. Wall crawling is automatic: run into a wall. DARK NIGHT + RAIN summons BATMAN: he chases, grapples and punches - web-fire him to freeze him for a few seconds, run (or sling away), or change the weather. Watch the small HP bar!';
 function ov(t){const o=$('ov');o.style.display=t?'flex':'none';if(t)$('ovt').innerHTML=t}
 function pauseT(){if(mode=='play'){mode='pause';ov('<b>PAUSED</b><br>'+HELP+'<br>ENTER resume · BACKSPACE checkpoint · G graphics ('+['Low','Medium','High'][qi]+') · M mute')}else if(mode=='pause'){mode='play';ov('')}}
 function enableMobileImmersive(){
@@ -802,7 +802,7 @@ addEventListener('keydown',e=>{const c=e.code;if(/^(Arrow|Space|Tab|Backspace)/.
  if(mode=='title'){if(c=='Enter')start();return}
  if(c=='Escape'){pauseT();return}
  if(mode=='pause'){if(c=='Enter')pauseT();else if(c=='Backspace'){respawn();pauseT()}else if(c=='KeyG'){qi=(qi+1)%3;setQ();pauseT();pauseT()}else if(c=='KeyM')mute^=1;else if(c=='Delete'){tokens.forEach(t=>{t.got=false;t.m.visible=true});score=0;sv.best=0;crimeScore=0;crimeScoreSave();save();toast('Progress reset')}return}
- if(c=='Space')fr.jump=.15;else if(c=='KeyE')fr.web=1;else if(c=='KeyF')webFire();else if(c=='KeyV')actSlam();else if(c=='KeyB')actBarrage();else if(c=='KeyK')actSling();else if(c=='KeyU')actSense();else if(c=='KeyQ')zipGo();else if(c=='KeyR'){yaw=heading+Math.PI;pitch=.3}else if(c=='KeyT'){tspd=tspd==1?20:1;0}else if(c=='Tab')$('ob').style.display=$('ob').style.display=='none'?'':'none'});
+ if(c=='Space')fr.jump=.15;else if(c=='KeyE')fr.web=1;else if(c=='KeyF')webFire();else if(c=='KeyV')actSlam();else if(c=='KeyB')actBarrage();else if(c=='KeyK')actSling();else if(c=='KeyL')actLock();else if(c=='KeyU')actSense();else if(c=='KeyQ')zipGo();else if(c=='KeyR'){yaw=heading+Math.PI;pitch=.3}else if(c=='KeyT'){tspd=tspd==1?20:1;0}else if(c=='Tab')$('ob').style.display=$('ob').style.display=='none'?'':'none'});
 addEventListener('keyup',e=>{K[e.code]=0;if(e.code=='KeyE'&&web)release()});
 addEventListener('blur',()=>{for(const k in K)K[k]=0});
 
@@ -832,7 +832,7 @@ addEventListener('blur',()=>{for(const k in K)K[k]=0});
  bind('mRelease',()=>zipGo());
  bind('mRun',()=>setKey('ShiftLeft',true),()=>setKey('ShiftLeft',false));
   bind('mFire',()=>webFire());bind('mSling',()=>actSling());
-  {const fan=$('mFan'),more=$('mMore');if(fan&&more){const AX=[['ZIP',()=>zipGo(),1],['SLAM',()=>actSlam(),1],['BARRAGE',()=>actBarrage(),2],['SENSE',()=>actSense(),2]],cnt={1:0,2:0},AN=[100,140,180];
+  {const fan=$('mFan'),more=$('mMore');if(fan&&more){const AX=[['ZIP',()=>zipGo(),1],['SLAM',()=>actSlam(),1],['LOCK',()=>actLock(),1],['BARRAGE',()=>actBarrage(),2],['SENSE',()=>actSense(),2]],cnt={1:0,2:0},AN=[100,140,180];
    AX.forEach(([lb,fn,rg],i)=>{const a=AN[cnt[rg]++]*Math.PI/180,r=rg==1?1.3:2.35,b=document.createElement('button');b.className='mBtn';b.id='mX'+i;b.textContent=lb;b.style.cssText='width:calc(var(--b)*.8);height:calc(var(--b)*.8);font-size:9px;right:calc(var(--b)*'+(2.925-Math.cos(a)*r-.4).toFixed(3)+');bottom:calc(var(--b)*'+(1.575+Math.sin(a)*r-.4).toFixed(3)+')';fan.appendChild(b);bind('mX'+i,()=>{fn();fan.classList.remove('open')})});
    bind('mMore',()=>{fan.classList.toggle('open')})}}
  bind('mPause',()=>{if(mode==='title')start();else pauseT()});
@@ -1151,7 +1151,7 @@ function refreshHud(){if(!joined||!chn)return;let n=1;try{n=Object.keys(chn.pres
 setInterval(()=>{
  if(!joined||!chn||chn.state!=='joined')return;
  const now=performance.now(),hp=hero.position,vv=v;      // hero + v are the game's globals
- const f=(grounded?1:0)|(web?2:0)|(onW?4:0);
+ const f=(grounded?1:0)|(web?2:0)|(onW?4:0)|(dive>.45&&!trk?8:0)|(sitK>.5?16:0)|(window.slingPose?32:0)|(zip?64:0)|(fireT>0?128:0)|(window.__carry&&window.__carry.on?256:0);
  const pay={i:myId,n:myName,c:CHAR,x:+hp.x.toFixed(2),y:+hp.y.toFixed(2),z:+hp.z.toFixed(2),h:+hero.rotation.y.toFixed(2),
   s:+Math.hypot(vv.x,vv.z).toFixed(1),u:+vv.y.toFixed(1),f:f};
  pay.d=Date.now();pay.t=Math.round(now);pay.q=(typeof score==='number'?score|0:0);if(web)pay.a=[+web.x.toFixed(1),+web.y.toFixed(1),+web.z.toFixed(1)];
@@ -1173,14 +1173,15 @@ function mkRemote(id,c,n){
  r.line=new T.Line(new T.BufferGeometry().setFromPoints([new T.Vector3,new T.Vector3]),new T.LineBasicMaterial({color:0xffffff}));
  r.line.frustumCulled=false;r.line.visible=false;S.add(r.line);
  loadModel(r,c);return r}
+const BN=['RightArm','RightForeArm','LeftArm','LeftForeArm','LeftUpLeg','LeftLeg','RightUpLeg','RightLeg'];
 function loadModel(r,c){
  const buf=glbBuf(c);if(!buf)return;r.c=c;const tok=r.tok=(r.tok||0)+1;
  new T.GLTFLoader().parse(buf,'',gl=>{
   if(r.dead||r.tok!==tok)return;
-  if(r.root){r.lean.remove(r.root)}
+  if(r.root){r.lean.remove(r.root)}r.bm={};
   const root=gl.scene;root.position.y=-.9;
   root.traverse(o=>{if(o.isMesh){o.frustumCulled=false;o.castShadow=true;const mt=o.material;if(mt&&mt.map){mt.map.encoding=T.LinearEncoding;mt.map.needsUpdate=true}}
-   if(o.isBone&&o.name.includes('RightHand_'))r.hand=o});
+   if(o.isBone){if(o.name.includes('RightHand_'))r.hand=o;for(const nn of BN)if(o.name.includes(nn+'_'))r.bm[nn]=o}});
   r.lean.add(root);r.root=root;r.mix=new T.AnimationMixer(root);r.acts={};r.cur=null;
   for(const cl of gl.animations){if(cl.name==='Land')continue;r.acts[cl.name]=r.mix.clipAction(cl)}
   r.ready=true;r.g.visible=true},e=>console.warn('remote model failed',e))}
@@ -1219,16 +1220,17 @@ function loop(){
   if(now-r.last>TIMEOUT){drop(r.id);continue}
   sampleSnap(r,now);
   r.g.position.set(r.px,r.py,r.pz);r.g.rotation.y=r.hh;
-  {const ddx=r.px-hero.position.x,ddz=r.pz-hero.position.z,far=ddx*ddx+ddz*ddz>160*160;if(far!==!!r.far){r.far=far;r.g.visible=!far&&r.ready}if(far){r.label.style.display='none';r.line.visible=false;continue}}
-  if(r.ready){
+  {const ddx=r.px-hero.position.x,ddz=r.pz-hero.position.z,d2=ddx*ddx+ddz*ddz,far=d2>160*160;r.d2=d2;if(far!==!!r.far){r.far=far;r.g.visible=!far&&r.ready}if(far){r.label.style.display='none';r.line.visible=false;continue}}
+  {const iv=window.__rVis?window.__rVis(r):true;r.inV=iv;if(r.ready&&r.g.visible!==iv)r.g.visible=iv;if(!iv)r.line.visible=false}
+  if(r.ready&&r.inV!==false){
    const air=!(r.f&1),web=!!(r.f&2),wall=!!(r.f&4);let nm='Idle',ts=1,hold=null,lean=0;
-   if(web){nm='Jump';hold=1.0;lean=.3}
-   else if(wall){nm='Run';ts=1.1;lean=.45}
+   if(web){if(r.d2<4900){nm='Idle'}else{nm='Jump';hold=1.0;lean=.3}}
+   else if(wall){if(r.d2<4900){nm='Idle'}else{nm='Run';ts=1.1;lean=.45}}
    else if(air){nm='Jump';hold=r.u>3?.48:.95;lean=.1}
    else if(r.s>.5){nm='Run';ts=Math.max(.6,Math.min(1.8,r.s/6))}
    setAnim(r,nm,ts,hold);r.leanX+=(lean-r.leanX)*Math.min(1,10*dt);r.lean.rotation.x=r.leanX;
    if(r.flip){const fk=(now-r.flip.t0)/r.flip.d;if(fk>=1){r.flip=null;r.lean.rotation.set(r.leanX,0,0)}else{const A=Math.PI*2*r.flip.n*(fk*fk*(3-2*fk)),y=r.flip.ty;let rx=0,ry=0,rz=0;if(y==0)rx=A;else if(y==1)rx=-A;else if(y==2)rz=A*r.flip.s;else if(y==3)ry=A*2*r.flip.s;else if(y==4){rx=A;ry=A*r.flip.s}else{rx=-A;rz=A*r.flip.s}r.lean.rotation.set(r.leanX+rx,ry,rz)}}
-   r.mix.update(dt);
+   r.ft=(r.ft||0)+1;r.fa=(r.fa||0)+dt;if(r.d2<2500||r.ft%3===0){r.mix.update(r.fa);r.fa=0}if(window.__rPose&&r.d2<4900)window.__rPose(r,dt,now);
    if(web&&r.a&&r.hand){r.hand.getWorldPosition(_h);_w.set(r.a[0],r.a[1],r.a[2]);const pa=r.line.geometry.attributes.position;pa.setXYZ(0,_h.x,_h.y,_h.z);pa.setXYZ(1,_w.x,_w.y,_w.z);pa.needsUpdate=true;r.line.visible=true}
    else r.line.visible=false}
   // name tag
@@ -1297,8 +1299,8 @@ function pedUpd(dt0){const T=RT();clockOff+=(clockTarget-clockOff)*Math.min(1,dt
   else if(q.sayT<=0){q.sayT=10+rnd()*14;if(hd<22)say(q.g,2.1,casualLine(),2600)}
   else if(trk&&hd<22&&q.cd<=0&&q.flee<=0&&rnd()<.05){q.actT=2.5;q.act=2;q.cd=12;say(q.g,2.1,pick(NPC.trickR),2200)}
   else if(q.actT<=0&&hd>12&&rnd()<.0012){q.act=Math.floor(rnd()*ACTS.length);q.actT=3+rnd()*4;if(hd<24)say(q.g,2.1,pick(ACTS[q.act].l),2600)}
-  q.ph+=dt*(q.flee>0?11:6)*q.sp;const s=Math.sin(q.ph)*.62;q.legs[0].rotation.x=s;q.legs[1].rotation.x=-s;
-  if(q.actT>0){q.actT-=dt;const a=ACTS[q.act];q.arms[0].rotation.x=a.a0+(a.w?Math.sin(q.ph*a.w*.4)*.4:0);q.arms[1].rotation.x=a.a1}else{q.arms[0].rotation.x=-s*.72;q.arms[1].rotation.x=s*.72}
+  q.ph+=dt*(q.flee>0?11:6)*q.sp;const s=Math.sin(q.ph)*.62,lod=hd2<2500||((q.ft=(q.ft||0)+1)%3===0);if(lod){q.legs[0].rotation.x=s;q.legs[1].rotation.x=-s}
+  if(q.actT>0){q.actT-=dt;const a=ACTS[q.act];q.arms[0].rotation.x=a.a0+(a.w?Math.sin(q.ph*a.w*.4)*.4:0);q.arms[1].rotation.x=a.a1}else if(lod){q.arms[0].rotation.x=-s*.72;q.arms[1].rotation.x=s*.72}
   q.g.position.set(x,Math.abs(Math.sin(q.ph))*.05,z);const yw=q.ax?(q.dir>0?0:Math.PI):(q.dir>0?Math.PI/2:-Math.PI/2);q.g.rotation.y=yw;
   if(q.head){let r=hd<16?Math.atan2(dx,dz)-yw:0;r=Math.atan2(Math.sin(r),Math.cos(r));q.head.rotation.y=Math.max(-1.1,Math.min(1.1,r))}}}
 window.pedUpd=pedUpd;
@@ -1359,7 +1361,7 @@ function drawMap(cv,bigMap){const c=cv.getContext('2d'),W=cv.width,rem=MPx()?MPx
  const[ux,uy]=pr(p.x,p.z);c.save();c.translate(ux,uy);c.rotate(bigMap?-yaw:0);c.fillStyle='#fff';c.strokeStyle='#d41f2e';c.lineWidth=2;c.beginPath();c.moveTo(0,-8);c.lineTo(6,7);c.lineTo(0,3);c.lineTo(-6,7);c.closePath();c.fill();c.stroke();c.restore()}
 function tpTo(id){const r=MPx().remotes.get(id);if(!r)return;p.set(r.px+1.5,r.py+1,r.pz);v.set(0,0,0);release();grounded=false;safe.copy(p);toast('Teleport: '+r.n);closeBig()}
 function fillList(){const rem=MPx()?[...MPx().remotes.values()]:[];lst.innerHTML=rem.length?'':'<span style="opacity:.7">No friends in this room yet</span>';
- for(const r of rem){const d=Math.round(Math.hypot(r.px-p.x,r.pz-p.z)),b=document.createElement('button');b.style.borderColor=pcol(r.id);b.textContent='TP · '+r.n+' · '+d+'m'+(r.sc?' · '+r.sc:'');b.onclick=()=>tpTo(r.id);lst.appendChild(b)}}
+ for(const r of rem){const d=Math.round(Math.hypot(r.px-p.x,r.pz-p.z)),b=document.createElement('button');b.style.borderColor=pcol(r.id);b.textContent='TP · '+r.n+' · '+d+'m'+(r.sc?' · '+r.sc:'');b.onclick=()=>tpTo(r.id);lst.appendChild(b);const lb=document.createElement('button');lb.style.borderColor=pcol(r.id);lb.textContent='LOCK';lb.onclick=()=>{closeBig();if(window.actLock)actLock(r.id)};lst.appendChild(lb)}}
 let bigOn=0,listT=0;function openBig(){bigOn=1;big.style.display='flex';fillList();try{document.exitPointerLock()}catch(e){}}function closeBig(){bigOn=0;big.style.display='none'}
 mmW.addEventListener('click',openBig);row.querySelector('#mmClose').onclick=closeBig;row.querySelector('#mmPing').onclick=()=>{pingMe();closeBig()};
 addEventListener('keydown',e=>{if(e.code=='KeyM'&&mode==='play'){bigOn?closeBig():openBig()}else if(e.code=='KeyY'&&mode==='play'&&!e.repeat)pingMe()});
@@ -2418,7 +2420,7 @@ function doPunch(){if(mode!=='play'||inRoom||menuOpen)return;let did=false,idx=0
    if(typeof cur.combo==='number'){idx=cur.combo%3}else{pa.combo=pa.t>0?pa.combo+1:0;pa.t=.95;idx=pa.combo%3}}
   else{if(pa.cd>0)return;const nc=pa.t>0?pa.combo+1:0;idx=nc%3;did=freePunch(idx,idx===2);if(did){pa.combo=nc;pa.t=.95}}
  }finally{window.__noPunchFx=0}
- if(did){PA.t=0;PA.idx=idx;PA.fin=idx===2;try{if(window.__pvpPunch)window.__pvpPunch(idx===2)}catch(e){}}}
+ if(did){PA.t=0;PA.idx=idx;PA.fin=idx===2;if(window.__punchSent)window.__punchSent(idx);try{if(window.__pvpPunch)window.__pvpPunch(idx===2)}catch(e){}}}
 /* bone poses (same technique the game uses for web-swinging) layered over the Mixamo animation */
 const lerpA=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t],ADD=(r,a,x,b,y)=>[r[0]+(a[0]-r[0])*x+(b[0]-r[0])*y,r[1]+(a[1]-r[1])*x+(b[1]-r[1])*y,r[2]+(a[2]-r[2])*x+(b[2]-r[2])*y];
 const REST=[0,-1,.02],PK={
@@ -2610,6 +2612,67 @@ setInterval(()=>{if(!live()||!window.__bat)return;const h=Math.round(window.__ba
  b.addEventListener('click',e=>{e.stopPropagation();ON=!ON;try{localStorage.setItem('sm_ff',ON?'1':'0')}catch(x){}lab();b.blur();sendHp();try{toast(ON?'Friendly fire ON - friends can hit you':'Friendly fire OFF')}catch(x){}});
  (tl||document.body).appendChild(b)})();
 window.__ff={get on(){return ON},set on(v){ON=!!v},hit,onPvp,onSlam};
+})();
+</script>
+<script>
+/* ===== MULTIPLAYER ANIMATION SYNC + WEB LOCK (carry) + perf helpers ===== */
+(function(){
+'use strict';
+const MPx=()=>window.__mp,send=o=>{const m=MPx();if(m&&m.joined)m.send(o)};
+/* perf: neighbourhood lookup cached forever (buildings are static) -> no per-frame Set/array garbage */
+const NRC=new Map();
+window.nearR=function(x,z,r){const i=Math.floor(x/64),j=Math.floor(z/64),k=((i+4)*200+(j+4))*8+r;let a=NRC.get(k);if(!a){const o=new Set;for(let u=-r;u<=r;u++)for(let w=-r;w<=r;w++){const l=G.get((i+u)*1000+j+w);if(l)for(const e of l)o.add(e)}a=[...o];NRC.set(k,a)}return a};
+/* perf: skip skinning/animation for friends who are off-screen */
+const frs=new T.Frustum(),pm=new T.Matrix4(),sph=new T.Sphere(new T.Vector3(),2.8);let fT=0;
+window.__rVis=r=>{const n=performance.now();if(n!==fT){fT=n;pm.multiplyMatrices(cam.projectionMatrix,cam.matrixWorldInverse);frs.setFromProjectionMatrix(pm)}sph.center.set(r.px,r.py+1,r.pz);return frs.intersectsSphere(sph)};
+/* remote pose layer: same bone-aiming technique as the local hero, driven by synced flags/events */
+const q1=new T.Quaternion,q2=new T.Quaternion,a1=new T.Vector3,a2=new T.Vector3,a3=new T.Vector3,a4=new T.Vector3,AV=new T.Vector3,FD=new T.Vector3,DD=new T.Vector3,LV=new T.Vector3,FF=new T.Vector3,YY=new T.Vector3(0,1,0);
+function raim(b,d){b.updateWorldMatrix(true,false);b.getWorldQuaternion(q1);a1.set(0,1,0).applyQuaternion(q1);q2.setFromUnitVectors(a1,a2.copy(d).normalize()).multiply(q1);b.parent.getWorldQuaternion(q1);b.quaternion.copy(q1.invert().multiply(q2))}
+const rp=(b,l,u,f)=>{DD.set(0,0,0).addScaledVector(LV,l).addScaledVector(YY,u).addScaledVector(FF,f);raim(b,DD)};
+function rframe(r){r.g.updateMatrixWorld(true);FF.set(Math.sin(r.hh),0,Math.cos(r.hh));r.bm.LeftArm.getWorldPosition(a3);r.bm.RightArm.getWorldPosition(a4);LV.copy(a3).sub(a4).normalize()}
+const REST=[0,-1,.02],PK={R:{c:[-.25,-.75,-.6],cf:[-.1,.35,.9],s:[-.2,.05,1],sf:[-.15,.05,1],gl:[.35,-.55,.55],glf:[.05,.7,.7]},U:{c:[-.3,-.95,-.15],cf:[-.2,-.7,.7],s:[-.2,.55,.75],sf:[-.1,.85,.5],gl:[.35,-.55,.55],glf:[.05,.7,.7]}};
+const lerpA=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t],ADD=(r,a,x,b,y)=>[r[0]+(a[0]-r[0])*x+(b[0]-r[0])*y,r[1]+(a[1]-r[1])*x+(b[1]-r[1])*y,r[2]+(a[2]-r[2])*x+(b[2]-r[2])*y];
+window.__rPose=function(r,dt,now){const b=r.bm;if(!b||!b.RightArm||!b.RightForeArm||!b.LeftArm||!b.LeftForeArm||!b.LeftUpLeg||!b.LeftLeg||!b.RightUpLeg||!b.RightLeg)return;
+ const f=r.f|0,anch=(f&2)&&r.a,wall=!!(f&4),carried=!!(f&256),fire=!!(f&128)||now<(r.fireUntil||0),dive=!!(f&8),sit=!!(f&16)||!!(f&32),pn=(r.pn&&now-r.pn.t0<300)?r.pn:null,L=r.lean;
+ L.position.y=sit?.54:.9;if(r.flip||!(anch||wall||dive||sit||fire||pn||carried))return;
+ if(anch){AV.set(r.a[0],r.a[1],r.a[2]).sub(a3.set(r.px,r.py+1.3,r.pz)).normalize();const hx=Math.sin(r.hh),hz=Math.cos(r.hh),rf=AV.x*hx+AV.z*hz,rl=AV.x*hz-AV.z*hx,kk=1-Math.exp(-16*dt),w0=r.wbx||0,w1=r.wbz||0;
+  r.wbx=w0+(Math.max(-.9,Math.min(.9,Math.atan2(rf,AV.y)*.7))-w0)*kk;r.wbz=w1+(-Math.max(-.5,Math.min(.5,Math.atan2(rl,AV.y)*.5))-w1)*kk;L.rotation.set(r.wbx,0,r.wbz);rframe(r);raim(b.RightArm,AV);raim(b.RightForeArm,AV);
+  if(carried){const sw=Math.sin(now/380)*.35,s2=Math.sin(now/310+1.3)*.3;rp(b.LeftArm,.5,.9,.2);rp(b.LeftForeArm,.3,.9,.2);rp(b.LeftUpLeg,.15+sw*.3,-.95,-.1+sw);rp(b.LeftLeg,0,-.8,-.5+s2);rp(b.RightUpLeg,-.15,-.95,-.1-sw);rp(b.RightLeg,0,-.8,-.5-s2)}
+  else{rp(b.LeftArm,.7,-.5,.25);rp(b.LeftForeArm,.2,-.3,.9);rp(b.LeftUpLeg,.1,-.9,-.3);rp(b.LeftLeg,0,-.5,-.85);rp(b.RightUpLeg,-.1,-.8,.15);rp(b.RightLeg,0,-.9,-.4)}}
+ else if(wall){L.rotation.set(0,0,0);rframe(r);r.cp=(r.cp||0)+dt*Math.max(5,r.s*1.6);const s=Math.sin(r.cp),A=Math.max(0,s),B=Math.max(0,-s);
+  rp(b.RightArm,-.5,.7+.5*A,.4);rp(b.RightForeArm,-.35,.9+.3*A,.3);rp(b.LeftArm,.5,.7+.5*B,.4);rp(b.LeftForeArm,.35,.9+.3*B,.3);rp(b.LeftUpLeg,.6,-.35+.55*A,.35);rp(b.LeftLeg,.35,-.85,.15);rp(b.RightUpLeg,-.6,-.35+.55*B,.35);rp(b.RightLeg,-.35,-.85,.15)}
+ else if(dive){L.rotation.set(1.35,0,0);rframe(r);rp(b.RightArm,-1,.15,.25);rp(b.RightForeArm,-1,.1,.2);rp(b.LeftArm,1,.15,.25);rp(b.LeftForeArm,1,.1,.2);rp(b.LeftUpLeg,.4,.1,-.9);rp(b.LeftLeg,.35,.05,-.9);rp(b.RightUpLeg,-.4,.1,-.9);rp(b.RightLeg,-.35,.05,-.9)}
+ else if(sit){L.rotation.set(.62+Math.sin(now/900)*.02,0,0);rframe(r);rp(b.RightArm,-.15,-.85,.5);rp(b.RightForeArm,-.05,-.95,.25);rp(b.LeftArm,.3,-.8,.45);rp(b.LeftForeArm,-.15,-.3,.95);rp(b.LeftUpLeg,.5,-.12,.85);rp(b.LeftLeg,-.2,-.9,-.4);rp(b.RightUpLeg,-.5,-.12,.85);rp(b.RightLeg,.2,-.9,-.4);
+  if(f&32){rp(b.LeftArm,1,.45,-.1);rp(b.LeftForeArm,1,.45,-.1);rp(b.RightArm,-1,.45,-.1);rp(b.RightForeArm,-1,.45,-.1)}}
+ else if(fire){L.rotation.x=.15;rframe(r);FD.set(r.fdx!=null?r.fdx:FF.x,.15,r.fdz!=null?r.fdz:FF.z);raim(b.RightArm,FD);raim(b.RightForeArm,FD)}
+ if(pn){const k=(now-pn.t0)/300,c=k<.1?k/.1:Math.max(0,1-(k-.1)/.2),s=k<.1?0:k<.3?(k-.1)/.2:k<.5?1:Math.max(0,1-(k-.5)/.5),g=Math.min(1,k*8)*(1-Math.max(0,(k-.8)*5));
+  const left=pn.idx===1,K=pn.idx===2?PK.U:PK.R,m=l=>left?[-l[0],l[1],l[2]]:l,sg=left?-1:1,hit=ADD(REST,m(K.c),c,m(K.s),s),hitF=ADD(REST,m(K.cf),c,m(K.sf),s),gd=lerpA(REST,[sg*-K.gl[0],K.gl[1],K.gl[2]],g),gdF=lerpA(REST,[sg*-K.glf[0],K.glf[1],K.glf[2]],g);
+  L.rotation.y=sg*.5*s*(pn.idx===2?.7:1);L.rotation.x+=(pn.idx===2?-.12:.12)*s;rframe(r);const act=left?'Left':'Right',off=left?'Right':'Left';
+  rp(b[act+'Arm'],hit[0],hit[1],hit[2]);rp(b[act+'ForeArm'],hitF[0],hitF[1],hitF[2]);rp(b[off+'Arm'],gd[0],gd[1],gd[2]);rp(b[off+'ForeArm'],gdF[0],gdF[1],gdF[2]);
+  if(r.s<3&&(f&1)){const a=Math.min(1,k*6)*(1-Math.max(0,(k-.8)*5)),f1=lerpA(REST,[sg*.12,-.85,.5],a),f2=lerpA(REST,[sg*.05,-.95,-.05],a),b1=lerpA(REST,[-sg*.12,-.9,-.4],a),b2=lerpA(REST,[-sg*.05,-.85,-.5],a),fo=left?'Right':'Left',ba=left?'Left':'Right';
+   rp(b[fo+'UpLeg'],f1[0],f1[1],f1[2]);rp(b[fo+'Leg'],f2[0],f2[1],f2[2]);rp(b[ba+'UpLeg'],b1[0],b1[1],b1[2]);rp(b[ba+'Leg'],b2[0],b2[1],b2[2])}}};
+window.__punchSent=idx=>send({e:'pn',k:idx});
+const _ev=window.__mpEv;window.__mpEv=function(m){if(m){const mp=MPx(),r=mp&&mp.remotes.get(m.i);
+ if(m.e==='pn'&&r)r.pn={t0:performance.now(),idx:m.k|0};
+ else if((m.e==='h'||m.e==='wf')&&r){r.fireUntil=performance.now()+450;r.fdx=m.fx;r.fdz=m.fz}
+ else if(m.e==='carry'&&mp&&m.t===mp.id)toast(m.on?(m.n||'A friend')+' locked onto you with a web':(m.n||'A friend')+' let go')}
+ return _ev&&_ev(m)};
+/* ---------- WEB LOCK: web onto a friend and hang from them like a ragdoll (rope physics reuses the swing code) ---------- */
+const C=window.__carry={on:0,id:null,t:0,force:0},carryA=new T.Vector3();
+function unlock(){if(!C.on)return;const id=C.id;C.on=0;C.id=null;C.force=1;try{release()}catch(e){}C.force=0;send({e:'carry',t:id,on:0})}
+const _rel=window.release;window.release=function(){if(C.on&&!C.force)return;return _rel.apply(this,arguments)};
+window.actLock=function(idArg){if(mode!=='play'||inRoom)return;if(C.on){unlock();toast('Unlocked');return}
+ const mp=MPx();if(!mp||!mp.joined||!mp.remotes.size){toast('LOCK: no friend in the room');return}
+ let best=null,bd=1e9;for(const r of mp.remotes.values()){if(!r.ready||(idArg&&r.id!==idArg))continue;const d=Math.hypot(r.px-p.x,r.py-p.y,r.pz-p.z);if(d<bd){bd=d;best=r}}
+ if(!best||bd>18){toast('LOCK: get within 18 m of a friend');return}
+ if(web)release();C.on=1;C.id=best.id;C.t=0;carryA.set(best.px,best.py+1.5,best.pz);web=carryA;L=Math.min(12,Math.max(6,bd));webL.visible=true;grounded=false;p.y+=.2;try{thwip()}catch(e){}
+ toast('LOCKED ON '+best.n+' - jump to let go');send({e:'carry',t:best.id,on:1})};
+function carryUpd(dt){if(!C.on)return;const mp=MPx(),r=mp&&mp.remotes.get(C.id);C.t+=dt;
+ if(!r||!r.ready||mode!=='play'||inRoom||Math.hypot(r.px-p.x,r.pz-p.z)>90){unlock();return}
+ carryA.set(r.px,r.py+1.5,r.pz);if(web!==carryA){web=carryA;webL.visible=true}if(L>9)L=9}
+const _su=window.slingUpd;window.slingUpd=function(dt){if(_su)_su(dt);carryUpd(dt)};
+addEventListener('keydown',e=>{if(e.code==='Space'&&C.on&&C.t>.35)unlock()},true);
+{const mj=document.getElementById('mJump');if(mj)mj.addEventListener('pointerdown',()=>{if(C.on&&C.t>.35)unlock()},true)}
 })();
 </script>
 </body></html>
